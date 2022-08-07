@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: p2
+  namespace: staging
+  labels:
+    app.kubernetes.io/name: hello
+spec:
+  selector:
+    matchLabels:
+      name: p2
+  template:
+    metadata:
+      labels:
+        name: p2
+        app.kubernetes.io/name: hello
+    spec:
+      containers:
+      - name: hello
+        image: vincentstark/9spokes-challenge:latest
+        resources:
+          limits:
+            memory: 100Mi
+            cpu: 100m
+          requests:
+            memory: 50Mi
+            cpu: 50m
+        ports:
+        - containerPort: 8080
